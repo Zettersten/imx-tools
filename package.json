@@ -1,0 +1,19 @@
+{
+  "name": "imx-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@imtbl/imx-sdk": "^1.6.1",
+    "web3": "^1.7.1"
+  },
+  "devDependencies": {
+    "tinyify": "^3.0.0"
+  }
+}

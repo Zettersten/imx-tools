@@ -1,0 +1,130 @@
+﻿@page "/{walletAddress}/to/{toAddress}"
+@inject IJSRuntime jsRuntime
+
+<PageTitle>Index</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudText Align="Align.Center">
+        <MudImage Width="128" Src="../logo.png" Class="mx-auto mb-6" />
+    </MudText>
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Batch Transfers</MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center" GutterBottom="true">
+        @WalletAddress?.TruncateBetween()
+        to
+        @ToAddress?.TruncateBetween()
+    </MudText>
+    <MudGrid Spacing="2" Class="mt-16">
+        <MudItem xs="8">
+            <MudText Typo="Typo.h5" GutterBottom="true">BOOK GAMEs Tokens</MudText>
+            <MudDataGrid Items="@Elements" Sortable="true" Filterable="true" Dense="true" @ref="Grid"
+                MultiSelection="true" RowClick="OnRowClickCallback" T="Element" RowStyleFunc="@_rowStyleFunc">
+                <Columns>
+                    <Column T="Element" Field="TokenId" />
+                    <Column T="Element" Field="Name">
+                        <CellTemplate>
+                            <h5>@context.Metadata.Name</h5>
+                            <small>@context.Metadata.Spectacular / @context.Metadata.TokenFrame</small>
+                        </CellTemplate>
+                    </Column>
+                    <Column T="Element" Field="ImageUrl" Filterable="false">
+                        <CellTemplate>
+                            <MudImage Src="@context.ImageUrl" Alt="@context.Name" Width="64" Elevation="25" />
+                        </CellTemplate>
+                    </Column>
+                </Columns>
+                <PagerContent>
+                    <MudDataGridPager T="Element" />
+                </PagerContent>
+            </MudDataGrid>
+        </MudItem>
+        <MudItem xs="4">
+            <MudText Typo="Typo.h5" GutterBottom="true">Cart</MudText>
+            <MudPaper Class="d-flex flex-column" Outlined="true">
+                <MudList Clickable="true">
+                    @foreach (var selected in Grid?.SelectedItems)
+                    {
+                        <MudListItem>
+                            <div class="d-flex">
+                                <MudText>@selected.Name</MudText>
+                            </div>
+                        </MudListItem>
+                    }
+                </MudList>
+                <div class="mt-auto">
+                    <MudDivider />
+                    <div class="d-flex pa-4">
+                        <MudText>Total:</MudText>
+                        <MudText Class="ml-auto"><b>@Grid?.SelectedItems.Count</b></MudText>
+                    </div>
+                </div>
+                <div class="mt-auto">
+                    <MudDivider />
+                    <div class="d-flex pa-4">
+                        <MudButton OnClick="OnTransferClick" Variant="Variant.Filled">Transfer NFTs
+                        </MudButton>
+                    </div>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code
+{
+
+    public List<Element> SelectedElements { get; set; } = new();
+
+    private Func<Element, int, string> _rowStyleFunc => (x, i) =>
+    {
+        var selected = Grid?.SelectedItems;
+
+        if (selected.Contains(x))
+        {
+            return "font-style: italic; background: #ddf4ff!important";
+        }
+
+        return "";
+    };
+
+    public void OnRowClickCallback(DataGridRowClickEventArgs<Element> ev)
+    {
+        return;
+    }
+
+    public MudDataGrid<Element>? Grid { get; set; }
+
+    public List<Element> Elements { get; set; } = new();
+
+    [Parameter]
+    public string? WalletAddress { get; set; }
+
+    [Parameter]
+    public string? ToAddress { get; set; }
+
+    private IJSObjectReference? module;
+
+    protected override async Task OnInitializedAsync()
+    {
+        module = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "./Pages/Index.razor.js");
+
+        var items = await module.InvokeAsync<List<Element>>("init", WalletAddress);
+
+        Elements.AddRange(items);
+    }
+
+    public async Task OnTransferClick()
+    {
+        if (module is not null && Grid is not null)
+        {
+            var selected = Grid?.SelectedItems;
+
+            if (selected is null || selected.Count == 0)
+            {
+                return;
+            }
+
+            await module.InvokeAsync<object>("transfer", selected.Select(x => x.TokenId), ToAddress?.ToLower());
+        }
+    }
+
+}
