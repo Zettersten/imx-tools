@@ -6,7 +6,7 @@ let linkFrameUrl = "https://link.x.immutable.com";
 if (location.href.includes('?beta=true')) {
     console.info("beta mode")
     starkContractAddress = "0x7917eDb51ecD6CdB3F9854c3cc593F33de10c623";
-    tokenAddress = "0x1C97Ada273C9A52253f463042f29117090Cd7D83";
+    tokenAddress = "0x01a75d789ec47271d740205944d101c32ed1c87d";
     publicApiUrl = "https://api.sandbox.x.immutable.com/v1";
     linkFrameUrl = "https://link.sandbox.x.immutable.com";
 }
