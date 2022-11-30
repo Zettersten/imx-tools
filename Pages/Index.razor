@@ -5,7 +5,7 @@
 
 <MudContainer MaxWidth="MaxWidth.ExtraLarge">
     <MudText Align="Align.Center">
-        <MudImage Width="128" Src="../logo.png" Class="mx-auto mb-6" />
+        <MudImage Width="128" Src="logo.png" Class="mx-auto mb-6" />
     </MudText>
     <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Batch Transfers</MudText>
     <MudText Typo="Typo.h6" Align="Align.Center" GutterBottom="true">
@@ -22,13 +22,13 @@
                     <Column T="Element" Field="TokenId" />
                     <Column T="Element" Field="Name">
                         <CellTemplate>
-                            <h5>@context.Metadata.Name</h5>
-                            <small>@context.Metadata.Spectacular / @context.Metadata.TokenFrame</small>
+                            <h5>@context.Item.Metadata.Name</h5>
+                            <small>@context.Item.Metadata.Spectacular / @context.Item.Metadata.TokenFrame</small>
                         </CellTemplate>
                     </Column>
                     <Column T="Element" Field="ImageUrl" Filterable="false">
                         <CellTemplate>
-                            <MudImage Src="@context.ImageUrl" Alt="@context.Name" Width="64" Elevation="25" />
+                            <MudImage Src="@context.Item.ImageUrl" Alt="@context.Item.Name" Width="64" Elevation="25" />
                         </CellTemplate>
                     </Column>
                 </Columns>
@@ -41,7 +41,7 @@
             <MudText Typo="Typo.h5" GutterBottom="true">Cart</MudText>
             <MudPaper Class="d-flex flex-column" Outlined="true">
                 <MudList Clickable="true">
-                    @foreach (var selected in Grid?.SelectedItems)
+                    @foreach (var selected in Grid!.SelectedItems)
                     {
                         <MudListItem>
                             <div class="d-flex">
