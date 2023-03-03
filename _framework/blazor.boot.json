@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "ImxTools.dll": "sha256-PEm0Vxw9XfoIbgff1t1Pl48huTlGl\/pvlTxJUoqf4y0=",
+      "ImxTools.dll": "sha256-ieJBOL0Ms4o+KR4IcEZ6ZQcjIQRDiSgpTNqhUXA+9DI=",
       "Microsoft.AspNetCore.Components.dll": "sha256-xy5s5Pk7XiKZSABR8TH79baktG52TWjpSYTWxKU+4J8=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-c4kuoYSA8x6inptlqvIvOF2O1KzHghm6X5t0iHllFEI=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-tWTuhpSd5HRtfsg0NmzTsBH7Zqm6DpIxA4J2Zai0SnE=",
