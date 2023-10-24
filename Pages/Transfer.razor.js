@@ -1,13 +1,13 @@
 function getConfig() {
-    let starkContractAddress = "0xa3AEe8BcE55BEeA1951EF834b99f3Ac60d1ABeeB";
+    let starkContractAddress = "0xa3aee8bce55beea1951ef834b99f3ac60d1abeeb";
     let tokenAddress = "0xac98d8d1bb27a94e79fbf49198210240688bb1ed";
     let publicApiUrl = "https://api.x.immutable.com/v1";
     let linkFrameUrl = "https://link.x.immutable.com";
     let isSandbox = false;
 
     if (location.href.includes('?beta=true')) {
-        starkContractAddress = "0x7917eDb51ecD6CdB3F9854c3cc593F33de10c623";
-        tokenAddress = "0x01a75d789ec47271d740205944d101c32ed1c87d";
+        starkContractAddress = "0x2d5c349fd8464da06a3f90b4b0e9195f3d1b7f98";
+        tokenAddress = "0xbabb5c8cf3b679e855e96ba77942cc3a184396a5";
         publicApiUrl = "https://api.sandbox.x.immutable.com/v1";
         linkFrameUrl = "https://link.sandbox.x.immutable.com";
         isSandbox = true;

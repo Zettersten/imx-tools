@@ -18,21 +18,23 @@
     <MudGrid Spacing="2" Class="mt-16">
         <MudItem xs="8">
             <MudText Typo="Typo.h5" GutterBottom="true">BOOK GAMEs Tokens</MudText>
-            <MudDataGrid Items="@Elements" Sortable="true" Filterable="true" Dense="true" @ref="Grid"
-                MultiSelection="true" RowClick="OnRowClickCallback" T="TokenResponseModel" RowStyleFunc="@_rowStyleFunc">
+            <MudDataGrid Items="@Elements" Filterable="true" Dense="true" @ref="Grid"
+                         MultiSelection="true" RowClick="OnRowClickCallback" T="TokenResponseModel" RowStyleFunc="@_rowStyleFunc">
                 <Columns>
-                    <Column T="TokenResponseModel" Field="TokenId" />
-                    <Column T="TokenResponseModel" Field="Name">
-                        <CellTemplate>
-                            <h5>@context.Item.Metadata.Name</h5>
-                            <small>@context.Item.Metadata.Spectacular / @context.Item.Metadata.TokenFrame</small>
-                        </CellTemplate>
-                    </Column>
-                    <Column T="TokenResponseModel" Field="ImageUrl" Filterable="false">
+                    <PropertyColumn Property="x => x.TokenId" />
+                    <PropertyColumn Property="x => x.Name">
+                        <TemplateColumn>
+                            <CellTemplate>
+                                <h5>@context.Item.Metadata.Name</h5>
+                                <small>@context.Item.Metadata.Spectacular / @context.Item.Metadata.TokenFrame</small>
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </PropertyColumn>
+                    <PropertyColumn Property="x => x.ImageUrl">
                         <CellTemplate>
                             <MudImage Src="@context.Item.ImageUrl" Alt="@context.Item.Name" Width="64" Elevation="25" />
                         </CellTemplate>
-                    </Column>
+                    </PropertyColumn>
                 </Columns>
                 <PagerContent>
                     <MudDataGridPager T="TokenResponseModel" />
@@ -62,7 +64,8 @@
                 <div class="mt-auto">
                     <MudDivider />
                     <div class="d-flex pa-4">
-                        <MudButton OnClick="OnTransferClick" Variant="Variant.Filled">Transfer NFTs
+                        <MudButton OnClick="OnTransferClick" Variant="Variant.Filled">
+                            Transfer NFTs
                         </MudButton>
                     </div>
                 </div>
