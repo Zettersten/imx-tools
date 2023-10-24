@@ -85293,6 +85293,6 @@ function noop() {}
 arguments[4][241][0].apply(exports,arguments)
 },{"dup":241}],819:[function(require,module,exports){
 window.Web3 = require("../../node_modules/web3/lib/index.js");
-window.web3 = new Web3("wss://small-floral-sun.quiknode.pro/");
+    window.web3 = new Web3("wss://eth-sepolia.g.alchemy.com/v2/C7zt4RUaqm6bZCDl4uLTxbHHMmiiVW_n");
 
 },{"../../node_modules/web3/lib/index.js":777}]},{},[819]);
