@@ -9,17 +9,18 @@ public partial class Transfer : ComponentBase
 {
     public List<TokenResponseModel> SelectedElements { get; set; } = new();
 
-    private Func<TokenResponseModel, int, string> _rowStyleFunc => (x, i) =>
-    {
-        var selected = Grid?.SelectedItems;
-
-        if (selected is not null && selected.Contains(x))
+    private Func<TokenResponseModel, int, string> _rowStyleFunc =>
+        (x, i) =>
         {
-            return "font-style: italic; background: #ddf4ff!important";
-        }
+            var selected = Grid?.SelectedItems;
 
-        return "";
-    };
+            if (selected is not null && selected.Contains(x))
+            {
+                return "font-style: italic; background: #ddf4ff!important";
+            }
+
+            return "";
+        };
 
     public void OnRowClickCallback(DataGridRowClickEventArgs<TokenResponseModel> ev)
     {
@@ -40,7 +41,10 @@ public partial class Transfer : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        module = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "./Pages/Transfer.razor.js");
+        module = await jsRuntime.InvokeAsync<IJSObjectReference>(
+            "import",
+            "./Pages/Transfer.razor.js"
+        );
 
         var items = await module.InvokeAsync<List<TokenResponseModel>>("init", WalletAddress);
 
@@ -58,7 +62,11 @@ public partial class Transfer : ComponentBase
                 return;
             }
 
-            await module.InvokeAsync<object>("transfer", selected.Select(x => x.TokenId), ToAddress?.ToLower());
+            await module.InvokeAsync<object>(
+                "transfer",
+                selected.Select(x => x.TokenId),
+                ToAddress?.ToLower()
+            );
         }
     }
 }

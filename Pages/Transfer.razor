@@ -44,14 +44,10 @@
         <MudItem xs="4">
             <MudText Typo="Typo.h5" GutterBottom="true">Cart</MudText>
             <MudPaper Class="d-flex flex-column" Outlined="true">
-                <MudList Clickable="true">
+                <MudList T="string">
                     @foreach (var selected in Grid!.SelectedItems)
                     {
-                        <MudListItem>
-                            <div class="d-flex">
-                                <MudText>@selected.Name</MudText>
-                            </div>
-                        </MudListItem>
+                        <MudListItem Text="@selected.Name" />
                     }
                 </MudList>
                 <div class="mt-auto">

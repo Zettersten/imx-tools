@@ -10,23 +10,42 @@
         </a>
     </MudText>
     <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">IMX Tools</MudText>
-    <EditForm Model="@TransferDetails" OnValidSubmit="OnValidSubmit">
+    <MudGrid Justify="Justify.Center">
         <MudItem xs="4">
             <MudCard>
-                <MudCardMedia Image="transfer-image.webp" Height="200" />
-                <MudCardContent>
-                    <MudText Typo="Typo.h5">Transfer Tool</MudText>
-                    <MudText Typo="Typo.body2" Class="mb-5">Quickly send tokens from one address to another.</MudText>
-                    <MudItem>
-                        <MudTextField Class="mb-5" Label="From Address" @bind-Value="TransferDetails.FromAddress" For="@(() => TransferDetails.FromAddress)" />
-                        <MudTextField Class="mb-5" Label="To Address" @bind-Value="TransferDetails.ToAddress" For="@(() => TransferDetails.ToAddress)" />
-                        <MudCheckBox Label="Sandbox" @bind-Checked="TransferDetails.IsSandbox" For="@(() => TransferDetails.IsSandbox)" />
-                    </MudItem>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Text" Color="Color.Primary">Go Transfer</MudButton>
-                </MudCardActions>
+                <EditForm Model="@TransferDetails" OnValidSubmit="OnValidSubmit">
+                    <MudCardMedia Image="transfer-image.webp" Height="200" />
+                    <MudCardContent>
+                        <MudText Typo="Typo.h5">Transfer Tool</MudText>
+                        <MudText Typo="Typo.body2" Class="mb-5">Quickly send tokens from one address to another.</MudText>
+                        <MudItem>
+                            <MudTextField Class="mb-5" Label="From Address" @bind-Value="TransferDetails.FromAddress" For="@(() => TransferDetails.FromAddress)" />
+                            <MudTextField Class="mb-5" Label="To Address" @bind-Value="TransferDetails.ToAddress" For="@(() => TransferDetails.ToAddress)" />
+                            <MudCheckBox Label="Sandbox" @bind-Checked="TransferDetails.IsSandbox" For="@(() => TransferDetails.IsSandbox)" />
+                        </MudItem>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Text" Color="Color.Primary">Go Transfer</MudButton>
+                    </MudCardActions>
+                </EditForm>
             </MudCard>
         </MudItem>
-    </EditForm>
+        <MudItem xs="4">
+            <MudCard>
+                <EditForm Model="@TransferDetails" OnValidSubmit="OnRegister">
+                    <MudCardMedia Image="transfer-image.webp" Height="200" />
+                    <MudCardContent>
+                        <MudText Typo="Typo.h5">Register Wallet</MudText>
+                        <MudText Typo="Typo.body2" Class="mb-5">Quickly register a wallet on IMX.</MudText>
+                        <MudItem>
+                            <MudCheckBox Label="Sandbox" @bind-Checked="TransferDetails.IsSandbox" For="@(() => TransferDetails.IsSandbox)" />
+                        </MudItem>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Text" Color="Color.Primary">Register</MudButton>
+                    </MudCardActions>
+                </EditForm>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
 </MudContainer>

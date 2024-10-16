@@ -13,8 +13,6 @@ function getConfig() {
         isSandbox = true;
     }
 
-    console.log("isSandbox", isSandbox);
-
     return {
         starkContractAddress,
         tokenAddress,
@@ -53,7 +51,7 @@ export async function transfer(assetIds, toAddress) {
     return assets;
 }
 
-async function getClient() {
+export async function getClient() {
 
     const config = getConfig();
 
@@ -63,9 +61,14 @@ async function getClient() {
     });
 }
 
-function getLink() {
+export function getLink() {
 
     const config = getConfig();
 
     return new imx.Link(config.linkFrameUrl);
+}
+
+export function setup() {
+    const sdk = getLink();
+    sdk.setup({});
 }

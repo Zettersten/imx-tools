@@ -4,9 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ImxTools.Extensions;
+
 public static class StringExtensions
 {
-    public static string TruncateBetween(this string valueToTruncate, int firstPartLength = 7, int lastPartLength = 4)
+    public static string TruncateBetween(
+        this string valueToTruncate,
+        int firstPartLength = 7,
+        int lastPartLength = 4
+    )
     {
         if (string.IsNullOrEmpty(valueToTruncate))
         {
